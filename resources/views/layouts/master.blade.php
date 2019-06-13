@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -7,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Laracast</title>
+    <title>Laracast</title>
 
     <!-- Font Awesome Icons -->
     <meta name="csrf-token" content="{{csrf_token()}}"/>
-   <link rel="stylesheet" href="/css/app.css"/>
+    <link rel="stylesheet" href="/css/app.css"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -65,12 +64,13 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <router-link to="/dashboard" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-tachometer-alt blue"></i>
                             <p>
                                 Dashboard
                                 <span class="right badge badge-danger">New</span>
@@ -80,7 +80,7 @@
 
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
+                            <i class="nav-icon fas fa-cog green"></i>
                             <p>
                                 Management
                                 <i class="right fa fa-angle-left"></i>
@@ -88,22 +88,17 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Active Page</p>
-                                </a>
+                                <router-link to="/users" class="nav-link">
+                                    <i class="fas fa-users nav-icon teal"></i>
+                                    <p>Users</p>
+                                </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Inactive Page</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
-                            <i class="nav-icon fas fa-user-alt"></i>
+                            <i class="nav-icon fas fa-user-alt orange"></i>
                             <p>
                                 Profile
                                 {{--<span class="right badge badge-secondary">New</span>--}}
@@ -111,12 +106,16 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-power-off"></i>
-                            <p>
-                                Logout
-                            </p>
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <i class="nav-icon fas fa-power-off red"></i>
+                            <p> {{ __('Logout') }}</p>
                         </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
 
                 </ul>
@@ -136,6 +135,7 @@
         <div class="content">
             <div class="container-fluid">
                 <router-view></router-view>
+                <vue-progress-bar></vue-progress-bar>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
